@@ -36,6 +36,9 @@ public class Graph {
     
     public void addEdge(int source, int destination)
     {
+        if(source == destination)
+            return;
+        
         Node s = getNode(source);
         Node d = getNode(destination);
         
@@ -77,16 +80,19 @@ public class Graph {
         sync.isCompleted = true;
     }
 
-    public void createRandomGraph()
+    public int[][] createRandomGraph()
     {
-        for(int i = 0; i < 10; ++i)
+        int[][] edges = new int[20][2];
+        for(int i = 0; i < 20; ++i)
         {
-            int id1 = (int)(Math.random() * 4);
-            int id2 = (int)(Math.random() * 4);
-            if(id1 == id2)
-                continue;
+            int id1 = (int)(Math.random() * 7);
+            int id2 = (int)(Math.random() * 7);
             addEdge(id1, id2);
+            addEdge(id2, id1);
+            edges[i][0] = id1;
+            edges[i][1] = id2;
         }
+        return edges;
     }
     
     // public static void main(String[] args)
